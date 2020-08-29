@@ -1,0 +1,49 @@
+function [dx,dy] = computeMotionVec(framePrev,frameCurr,p,q,k)
+% Performs a sequential search in the colocated region of the first frame
+% with radius of k=7.
+%       (p,q) -> co-located block position
+%        k    -> search radius
+%     (dx,dy) -> hold the values of the offset (in terms of pixel location)
+%   framePrev -> First frame (colocation), dimension 48-by-48
+%   frameCurr -> Second frame (target), dimension 16-by-16
+
+%Takes target frame and calculates MAD against all possible colocated block
+%from the prev frame
+
+blockSize = 16        
+framePrevPad = padarray(framePrev,[k,k])
+targetBlock = frameCurr(p:p+blockSize-1,q:q+blockSize-1)
+searchArea = framePrevPad(p:p+(blockSize*3)-1,q:q+(blockSize*3)-1)
+
+
+dim = size(searchArea)
+for m = 1:dim(1,1)
+    for n = 1:dim(1,1)
+        candidateBlock = searchArea(m:m+blockSize-1,n:n+blockSize-1)
+        
+        
+        
+        
+    
+    end
+
+    
+    
+dim = [80 80]
+for i = 1:blk_size:dim(1,1)
+    for j = 1:blk_size:dim(1,2)
+        targetblk = frame2(i:i+(blk_size-1),j:j+(blk_size-1)) 
+        searchArea = frame1_padded(i:i+(blk_size*3)-1,j:j+(blk_size*3-1))
+        computeMotionVec(searchArea, targetblk, 1, 1, 7)
+    end
+end
+
+
+
+dim = size(frameCurr)
+
+
+
+
+
+end
